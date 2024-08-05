@@ -14,12 +14,28 @@ public class PrintDanServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		response.setContentType("text/html;charset=UTF-8");
+		
+		
+		// 주소 뒤에 printDan?dan=8 일때, 8이 인자
+		// printDan?dan=9&limit=4 <= dan에 9를 주고 limit에 4를 줌, 파라미터끼리는 &로 연결
+		String inputedDan = request.getParameter("dan");
+		String inputedLimit = request.getParameter("limit");
 
-		response.getWriter().append("==8단==<br>");
+		// 아무값을 주지 않았을때 기본으로 1이 주어짐
+		if (inputedDan == null) {
+			inputedDan = "1";
+		}
 
-		int dan = 8;
+		if (inputedLimit == null) {
+			inputedLimit = "1";
+		}
 
-		for (int i = 1; i <= 9; i++) {
+		int dan = Integer.parseInt(inputedDan);
+		int limit = Integer.parseInt(inputedLimit);
+
+		response.getWriter().append(String.format("==%d단==<br>", dan));
+
+		for (int i = 1; i <= limit; i++) {
 			response.getWriter().append(String.format("%d * %d = %d<br>", dan, i, dan * i));
 		}
 
