@@ -7,11 +7,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/home/main2")
-public class HomeMainServlet2 extends HttpServlet {
+@WebServlet("/home/printDan")
+public class HomePrintDan extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Hello World!!!!!!!").append(request.getContextPath());
+		
+		//response.getWriter().append("Hi").append(request.getContextPath());
+		// 응답을 바로 하지 않고 또 request를 한다.
+		//forward(request, response)를 붙이면 jsp 파일을 활용할 수 있다. 
+		request.getRequestDispatcher("/jsp/home/printDan.jsp").forward(request, response);
 	}
 
 
