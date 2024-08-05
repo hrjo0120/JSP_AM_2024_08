@@ -20,6 +20,7 @@ public class PrintDanServlet extends HttpServlet {
 		// printDan?dan=9&limit=4 <= dan에 9를 주고 limit에 4를 줌, 파라미터끼리는 &로 연결
 		String inputedDan = request.getParameter("dan");
 		String inputedLimit = request.getParameter("limit");
+		String inputedColor = request.getParameter("color");
 
 		// 아무값을 주지 않았을때 기본으로 1이 주어짐
 		if (inputedDan == null) {
@@ -33,10 +34,12 @@ public class PrintDanServlet extends HttpServlet {
 		int dan = Integer.parseInt(inputedDan);
 		int limit = Integer.parseInt(inputedLimit);
 
-		response.getWriter().append(String.format("==%d단==<br>", dan));
+		response.getWriter().append(String.format("<div style='color:%s;'>==%d단 출력 * %d까지 글자 색상은 %s==</div>", inputedColor, dan, limit, inputedColor));
 
+		
 		for (int i = 1; i <= limit; i++) {
-			response.getWriter().append(String.format("%d * %d = %d<br>", dan, i, dan * i));
+			
+			response.getWriter().append(String.format("<div style=\"color:%s;\">%d * %d = %d</div>", inputedColor, dan, i, dan * i));
 		}
 
 	}
