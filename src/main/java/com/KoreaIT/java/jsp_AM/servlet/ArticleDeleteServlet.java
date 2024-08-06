@@ -16,8 +16,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/detail")
-public class ArticleDetailServlet extends HttpServlet {
+@WebServlet("/article/doDelete")
+public class ArticleDeleteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -42,18 +42,16 @@ public class ArticleDetailServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
 
-			
-			
 			int id = Integer.parseInt(request.getParameter("id"));
 
-			SecSql sql = SecSql.from("SELECT *");
+			SecSql sql = SecSql.from("DELETE");
 			sql.append("FROM article");
 			sql.append("WHERE id = ?", id);
 
-			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+			DBUtil.delete(conn, sql);
 
-			request.setAttribute("articleRow", articleRow); //JSP로 값을 넘겨줌
-			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
+			response.getWriter()
+					.append(String.format("<script>alert('%d번 글이 삭제 됨'); location.replace('list');</script>", id));
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);
