@@ -15,25 +15,22 @@
 <title>게시물 목록</title>
 </head>
 <body>
+   
 	<h2>게시물 목록</h2>
-	
-	<a href="https://www.naver.com" target="_blank">네이버</a>
-	<a href="http://localhost:8080/JSP_AM_2024_08/article/list"
-		target="_blank">리스트 새 창</a>
-	<a href="detail" target="_blank">디테일 새 창</a>
 
+	<a href="../home/main">메인 페이지로 </a>
+	
 	<ul>
 		<%
 		for (Map<String, Object> articleRow : articleRows) {
 		%>
-		<li>
-		<a href="detail?id=<%=articleRow.get("id")%>"><%=articleRow.get("id")%>번,
+		<li><a href="detail?id=<%=articleRow.get("id")%>"><%=articleRow.get("id")%>번,
 				<%=articleRow.get("regDate")%>,<%=articleRow.get("title")%>,<%=articleRow.get("body")%></a></li>
 		<%
 		}
 		%>
 	</ul>
-		
+			
 			
 </body>
 </html>

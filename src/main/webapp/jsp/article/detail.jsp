@@ -5,6 +5,7 @@
 	pageEncoding="UTF-8"%>
 
 <%
+// 값을 받음
 Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("articleRow");
 %>
 <!DOCTYPE html>
@@ -14,6 +15,8 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 <title>게시물 상세페이지</title>
 </head>
 <body>
+
+	<a href="../home/main">메인 페이지로 </a>
 
 	<h2>게시물 상세페이지</h2>
 

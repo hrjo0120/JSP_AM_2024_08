@@ -1,4 +1,4 @@
-package com.KoreaIT.java.jsp_AM;
+package com.KoreaIT.java.jsp_AM.servlet;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -7,14 +7,16 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
+import com.KoreaIT.java.jsp_AM.util.DBUtil;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/article/list")
-public class ArticleListServlet extends HttpServlet {
+@WebServlet("/article/detail")
+public class ArticleDetailServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -28,8 +30,6 @@ public class ArticleListServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		response.getWriter().append("123");
-
 		String url = "jdbc:mysql://127.0.0.1:3306/24_08_JAM?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul";
 
 		String user = "root";
@@ -41,18 +41,17 @@ public class ArticleListServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
 
-			DBUtil dbUtil = new DBUtil(request, response);
-
-			String sql = "SELECT * FROM article ORDER BY id DESC";
-
-			List<Map<String, Object>> articleRows = dbUtil.selectRows(conn, sql);
 			
-			//response.getWriter().append(articleRows.toString());
-
-			request.setAttribute("articleRows", articleRows);
-			// 넘겨줄 값을 지정할 수 있다.
-			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
 			
+			int id = Integer.parseInt(request.getParameter("id"));
+
+			//String sql = "SELECT * FROM article ORDER BY id DESC";
+			String sql = String.format("SELECT * FROM article WHERE id = %d", id);
+
+			Map<String, Object> articleRow = DBUtil.selectRow(conn, sql);
+
+			request.setAttribute("articleRow", articleRow); //JSP로 값을 넘겨줌
+			request.getRequestDispatcher("/jsp/article/detail.jsp").forward(request, response);
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);
