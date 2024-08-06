@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.KoreaIT.java.jsp_AM.util.DBUtil;
+import com.KoreaIT.java.jsp_AM.util.SecSql;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -43,12 +44,14 @@ public class ArticleListServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
 
-			String sql = "SELECT * FROM article ORDER BY id DESC";
+//			String sql = "SELECT * FROM article ORDER BY id DESC";
+
+			SecSql sql = SecSql.from("SELECT *");
+			sql.append("FROM article");
+			sql.append("ORDER BY id DESC");
 
 			List<Map<String, Object>> articleRows = DBUtil.selectRows(conn, sql);
 			
-			//response.getWriter().append(articleRows.toString());
-
 			request.setAttribute("articleRows", articleRows);
 			// 넘겨줄 값을 지정할 수 있다.
 			request.getRequestDispatcher("/jsp/article/list.jsp").forward(request, response);
