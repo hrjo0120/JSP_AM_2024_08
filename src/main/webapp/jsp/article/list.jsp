@@ -15,9 +15,44 @@
 </head>
 <body>
 
+	<h2>게시물 목록 v4</h2>
+
+	<ul>
+		<%
+		for (Map<String, Object> articleRow : articleRows) {
+		%>
+		<li><%=articleRow.get("id")%>번, <%=articleRow.get("regDate")%>,<%=articleRow.get("title")%>,<%=articleRow.get("body")%></li>
+		<%
+		}
+		%>
+	</ul>
+
+	<h2>게시물 목록 v3</h2>
+
+	<ul>
+		<%
+		for (int i = 0; i < articleRows.size(); i++) {
+		%>
+		<li><%=articleRows.get(i).get("id")%>번, <%=articleRows.get(i).get("regDate")%>,<%=articleRows.get(i).get("title")%>,<%=articleRows.get(i).get("body")%></li>
+		<%
+		}
+		%>
+	</ul>
+
+	<h2>게시물 목록 v2</h2>
+
+	<ul>
+		<%
+		for (int i = 0; i <= 2; i++) {
+		%>
+		<li><%=articleRows.get(i).get("id")%>번, <%=articleRows.get(i).get("regDate")%>,<%=articleRows.get(i).get("title")%>,<%=articleRows.get(i).get("body")%></li>
+		<%
+		}
+		%>
+	</ul>
+		
 	<h2>게시물 목록 v1</h2>
-	
-	
+
 	<ul>
 		<!-- 값을 가져오기때문에 <% %>태그 뒤에 =을 작성해주고, "번"은 자바 영역 뒤에 작성해준다. -->
 		<li><%=articleRows.get(0).get("id") %>번, <%=articleRows.get(0).get("regDate") %>, <%=articleRows.get(0).get("title") %>, <%=articleRows.get(0).get("body") %></li>
