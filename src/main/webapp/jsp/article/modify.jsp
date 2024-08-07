@@ -4,19 +4,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
+<%
+Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("articleRow");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>글쓰기</title>
+<title><%=articleRow.get("id")%>번 글수정</title>
 </head>
 <body>
 
 	<a href="../home/main">메인 페이지로 </a>
 
-	<h2>글쓰기</h2>
+	<h2><%=articleRow.get("id")%>번 글 수정</h2>
 
-	<form method="POST" action="doWrite">
+	<form method="POST" action="doModify">
+		<input type="hidden" value="<%=articleRow.get("id")%>" name="id"/>
 		<div>
 			제목 : <input type="text" placeholder="제목을 입력하세요." name="title" />
 		</div>
