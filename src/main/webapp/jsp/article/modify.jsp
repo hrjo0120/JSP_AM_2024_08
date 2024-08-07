@@ -23,13 +23,19 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 	<form method="POST" action="doModify">
 		<input type="hidden" value="<%=articleRow.get("id")%>" name="id"/>
 		<div>
+			번호 :
+			<%=articleRow.get("id")%></div>
+		<div>
+			날짜 :
+			<%=articleRow.get("regDate")%></div>
+		<div>
 			제목 : <input type="text" placeholder="제목을 입력하세요." name="title" />
 		</div>
 		<div>
 			내용 :
 			<textarea type="text" placeholder="내용을 입력하세요." name="body"></textarea>
 		</div>
-		<button type="submit">작성</button>
+		<button type="submit">수정</button>
 	</form>
 
 
