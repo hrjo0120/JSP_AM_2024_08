@@ -42,7 +42,6 @@ public class ArticleWriteServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
 
-			int id = Integer.parseInt(request.getParameter("id"));
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
 			
@@ -50,9 +49,9 @@ public class ArticleWriteServlet extends HttpServlet {
 			sql.append("INTO article");
 			sql.append("SET regDate = NOW(),");
             sql.append("title = ?,", title);
-            sql.append("`body`= ?", body);
+            sql.append("`body`= ?;", body);
 
-			DBUtil.insert(conn, sql);
+			int id = DBUtil.insert(conn, sql);
 
 			response.getWriter()
 					.append(String.format("<script>alert('%d번 게시글이 생성되었습니다.'); location.replace('list');</script>", id));
