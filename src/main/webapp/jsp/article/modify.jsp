@@ -18,10 +18,11 @@ Map<String, Object> articleRow = (Map<String, Object>) request.getAttribute("art
 
 	<a href="../home/main">메인 페이지로 </a>
 
-	<h2><%=articleRow.get("id")%>번 글 수정</h2>
+	<h2><%=articleRow.get("id")%>번 글 수정
+	</h2>
 
 	<form method="POST" action="doModify">
-		<input type="hidden" value="<%=articleRow.get("id")%>" name="id"/>
+		<input type="hidden" value="<%=articleRow.get("id")%>" name="id" />
 		<div>
 			번호 :
 			<%=articleRow.get("id")%></div>
