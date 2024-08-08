@@ -80,7 +80,8 @@ public class MemberDoLoginServlet extends HttpServlet {
 //			int id = DBUtil.insert(conn, sql);
 
 			response.getWriter()
-					.append(String.format("<script>alert('%s님 로그인 됨'); location.replace('../article/list');</script>", memberRow.get("name")));
+					.append(String.format("<script>alert('%s님 로그인 됨'); location.replace('../article/list');</script>",
+							memberRow.get("name")));
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);

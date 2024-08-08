@@ -46,7 +46,7 @@
 		onsubmit="LoginForm__submit(this); return false;">
 
 		<div>
-			아이디 : <input autocomplete="off" type="text" placeholder="아이디 입력해"
+			아이디 : <input autocomplete="off" type="text" placeholder="아이디를 입력하세요."
 				name="loginId" />
 		</div>
 		<div>

@@ -15,6 +15,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/article/doWrite")
 public class ArticleDoWriteServlet extends HttpServlet {
@@ -42,19 +43,23 @@ public class ArticleDoWriteServlet extends HttpServlet {
 			conn = DriverManager.getConnection(url, user, password);
 			response.getWriter().append("연결 성공!");
 
+			HttpSession session = request.getSession();
+
 			String title = request.getParameter("title");
 			String body = request.getParameter("body");
-			
+			int loginedMemberId = (int) session.getAttribute("loginedMemberId");
+
 			SecSql sql = SecSql.from("INSERT");
 			sql.append("INTO article");
 			sql.append("SET regDate = NOW(),");
-            sql.append("title = ?,", title);
-            sql.append("`body`= ?;", body);
+			sql.append("memberId = ?,", loginedMemberId);
+			sql.append("title = ?,", title);
+			sql.append("`body`= ?;", body);
 
 			int id = DBUtil.insert(conn, sql);
 
-			response.getWriter()
-					.append(String.format("<script>alert('%d번 게시글이 생성되었습니다.'); location.replace('list');</script>", id));
+			response.getWriter().append(
+					String.format("<script>alert('%d번 게시글이 생성되었습니다.'); location.replace('list');</script>", id));
 
 		} catch (SQLException e) {
 			System.out.println("에러 1 : " + e);
@@ -69,7 +74,7 @@ public class ArticleDoWriteServlet extends HttpServlet {
 		}
 
 	}
-	
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doGet(request, response);
