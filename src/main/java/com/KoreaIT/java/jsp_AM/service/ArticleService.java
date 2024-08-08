@@ -2,9 +2,9 @@ package com.KoreaIT.java.jsp_AM.service;
 
 import java.sql.Connection;
 import java.util.List;
-import java.util.Map;
 
 import com.KoreaIT.java.jsp_AM.dao.ArticleDao;
+import com.KoreaIT.java.jsp_AM.dto.Article;
 import com.KoreaIT.java.jsp_AM.util.DBUtil;
 import com.KoreaIT.java.jsp_AM.util.SecSql;
 
@@ -23,7 +23,7 @@ public class ArticleService {
 
 	}
 
-	public List<Map<String, Object>> getForPrintArticles(int limitFrom, int itemsInAPage) {
+	public List<Article> getForPrintArticles(int limitFrom, int itemsInAPage) {
 		return articleDao.getForPrintArticles(limitFrom, itemsInAPage);
 	}
 
