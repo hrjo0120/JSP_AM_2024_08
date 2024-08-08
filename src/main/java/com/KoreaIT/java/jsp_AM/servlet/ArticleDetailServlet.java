@@ -43,7 +43,7 @@ public class ArticleDetailServlet extends HttpServlet {
 
 			int id = Integer.parseInt(request.getParameter("id"));
 			
-			SecSql sql = SecSql.from("SELECT A.*, M.name");
+			SecSql sql = SecSql.from("SELECT A.*, M.name, M.name AS writer");
 			sql.append("FROM article AS A");
 			sql.append("INNER JOIN `member` AS M");
 			sql.append("ON A.memberId = M.id");
