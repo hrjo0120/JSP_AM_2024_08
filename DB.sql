@@ -80,3 +80,40 @@ SET regDate = NOW(),
 memberId = CEILING(RAND() * 3),
 title = CONCAT('제목__', RAND()),
 `body` = CONCAT('내용__', RAND());
+###############################################################################
+DELETE FROM `member`; #행삭제
+DROP TABLE `member`; #테이블 삭제
+
+CREATE TABLE `member`(
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    loginId CHAR(30) NOT NULL,
+    loginPw CHAR(200) NOT NULL,
+    `name` CHAR(100) NOT NULL
+);
+
+## 회원 테스트 데이터
+INSERT INTO `member`
+SET regDate = NOW(),
+loginId = 'test1',
+loginPw = 'test1',
+`name` = '회원1';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+loginId = 'test2',
+loginPw = 'test2',
+`name` = '회원2';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+loginId = 'test3',
+loginPw = 'test3',
+`name` = '회원3';
+
+SELECT * FROM `member`;
+
+
+SELECT * FROM `member` WHERE loginId = 'test1';
+
+SHOW TABLES;
